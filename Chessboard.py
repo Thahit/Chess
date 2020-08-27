@@ -1,5 +1,5 @@
 import pygame
-
+from abc import ABC
 
 #img from https://en.wikipedia.org/wiki/Chess_piece
 white={"king": pygame.image.load("img/wKing.png"), "queen": pygame.image.load("img/wQueen.png"), "rook":pygame.image.load("img/wRook.png"),
@@ -21,8 +21,34 @@ border=30
 height=gridsize*8+ 2*border
 font = pygame.font.Font('freesansbold.ttf', 20)
 screen = pygame.display.set_mode((width, height))
+#__________________________class types______________________________________________
+#to check for allies/enemies
+class Black(ABC):
+    def __init__(self, y, x):
+        self.x=x
+        self.y=y
+    def arraypos(self, array):  # where is it in array
+        return (8 - self.y, self.x - 1)
+
+    def show(self):
+        pass
+
+class White(ABC):
+    def __init__(self, y, x):
+        self.x = x
+        self.y = y
+
+    def arraypos(self, array):  # where is it in array
+        return (8 - self.y, self.x - 1)
+    def show(self):
+        pass
+#get pos from index
+def idxToPos(tuple): #not sure if ti will get used
+    x=tuple[0]+8
+    y=tuple[1]+1
+    return (x,y)
 #___________________________pieces___________________________________________________________________________
-class bRook():
+class bRook(Black):
     def __init__(self, y, x):
         self.val=5
         self.x=x
@@ -33,11 +59,76 @@ class bRook():
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["rook"],(posx,posy))
 
-    def move(self):
-        pass
 
 
-class bKing():
+    def legal(self, field): # show legal moves  works
+        idx= self.arraypos(field)  #return tuple(idx1, idx2)
+        legal=[] #list of legal moves
+
+        i=-1
+        up=True
+        while up: #nothing in between     move up
+            if idx[0]+i>=0:
+                if field[idx[0]+i][idx[1]] ==0:# no piece
+                    legal.append((idx[0]+i, idx[1]))
+                elif isinstance(field[idx[0]+i][idx[1]] , White):#if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    up=False
+                else:#friendly piece
+                    up=False
+                i-=1
+            else:#out of array
+                up=False
+
+        i=1
+        down=True
+        while down: #nothing in between     move up
+            if idx[0]+i<=7:
+                if field[idx[0]+i][idx[1]] ==0:# no piece
+                    legal.append((idx[0]+i, idx[1]))
+                elif isinstance(field[idx[0]+i][idx[1]] , White):#if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    down=False
+                else:#friendly piece
+                    down=False
+                i+=1
+            else:#out of array
+                down=False
+
+        i = 1
+        right = True
+        while right:  # nothing in between     move up
+            if idx[1] + i <= 7:
+                if field[idx[0]][idx[1]+i] == 0:  # no piece
+                    legal.append((idx[0] , idx[1]+ i))
+                elif isinstance(field[idx[0] ][idx[1]+ i], White):  # if enemy piece
+                    legal.append((idx[0] , idx[1]+ i))
+                    right = False
+                else:  # friendly piece
+                    right = False
+                i += 1
+            else:  # out of array
+                right = False
+
+        i = -1
+        left = True
+        while left:  # nothing in between     move up
+            if idx[1] + i >= 0:
+                if field[idx[0]][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0], idx[1] + i))
+                elif isinstance(field[idx[0]][idx[1] + i], White):  # if enemy piece
+                    legal.append((idx[0], idx[1] + i))
+                    left = False
+                else:  # friendly piece
+                    left = False
+                i -= 1
+            else:  # out of array
+                left = False
+
+        return legal
+
+
+class bKing(Black):
     def __init__(self, y, x):
         self.val = float("inf")
 
@@ -50,7 +141,8 @@ class bKing():
         screen.blit(black["king"],(posx,posy))
 
 
-class bKnight():
+
+class bKnight(Black):
     def __init__(self, y, x):
         self.val = 5
 
@@ -62,7 +154,8 @@ class bKnight():
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["knight"],(posx,posy))
 
-class bQueen():
+
+class bQueen(Black):
     def __init__(self, y, x):
         self.val = 9
 
@@ -74,7 +167,9 @@ class bQueen():
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["queen"],(posx,posy))
 
-class bBishop():
+
+
+class bBishop(Black):
     def __init__(self, y, x):
         self.val = 3
 
@@ -86,7 +181,9 @@ class bBishop():
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["bishop"],(posx,posy))
 
-class bPawn():
+
+
+class bPawn(Black):
     def __init__(self, y, x):
         self.val = 1
 
@@ -98,7 +195,9 @@ class bPawn():
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["pawn"],(posx,posy))
 
-class wRook():
+
+
+class wRook(White):
     def __init__(self, y, x):
         self.val = 5
 
@@ -110,8 +209,74 @@ class wRook():
         posy= (8-self.y)*gridsize+border+5
         screen.blit(white["rook"],(posx,posy))
 
+    def legal(self, field): # show legal moves   works
+        idx= self.arraypos(field)  #return tuple(idx1, idx2)
+        legal=[] #list of legal moves
 
-class wKing():
+        i=-1
+        up=True
+        while up: #nothing in between     move up
+            if idx[0]+i>=0:
+                if field[idx[0]+i][idx[1]] ==0:# no piece
+                    legal.append((idx[0]+i, idx[1]))
+                elif isinstance(field[idx[0]+i][idx[1]] , Black):#if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    up=False
+                else:#friendly piece
+                    up=False
+                i-=1
+            else:#out of array
+                up=False
+
+        i=1
+        down=True
+        while down: #nothing in between     move up
+            if idx[0]+i<=7:
+                if field[idx[0]+i][idx[1]] ==0:# no piece
+                    legal.append((idx[0]+i, idx[1]))
+                elif isinstance(field[idx[0]+i][idx[1]] , Black):#if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    down=False
+                else:#friendly piece
+                    down=False
+                i+=1
+            else:#out of array
+                down=False
+
+        i = 1
+        right = True
+        while right:  # nothing in between     move up
+            if idx[1] + i <= 7:
+                if field[idx[0]][idx[1]+i] == 0:  # no piece
+                    legal.append((idx[0] , idx[1]+ i))
+                elif isinstance(field[idx[0] ][idx[1]+ i], Black):  # if enemy piece
+                    legal.append((idx[0] , idx[1]+ i))
+                    right = False
+                else:  # friendly piece
+                    right = False
+                i += 1
+            else:  # out of array
+                right = False
+
+        i = -1
+        left = True
+        while left:  # nothing in between     move up
+            if idx[1] + i >= 0:
+                if field[idx[0]][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0], idx[1] + i))
+                elif isinstance(field[idx[0]][idx[1] + i], Black):  # if enemy piece
+                    legal.append((idx[0], idx[1] + i))
+                    left = False
+                else:  # friendly piece
+                    left = False
+                i -= 1
+            else:  # out of array
+                left = False
+
+        return legal
+
+
+class wKing(White):
     def __init__(self, y, x):
         self.val = float("inf")
 
@@ -124,7 +289,8 @@ class wKing():
         screen.blit(white["king"], (posx, posy))
 
 
-class wKnight():
+
+class wKnight(White):
     def __init__(self, y, x):
         self.val = 3
 
@@ -137,7 +303,7 @@ class wKnight():
         screen.blit(white["knight"], (posx, posy))
 
 
-class wQueen():
+class wQueen(White):
     def __init__(self, y, x):
         self.val = 9
 
@@ -150,7 +316,7 @@ class wQueen():
         screen.blit(white["queen"], (posx, posy))
 
 
-class wBishop():
+class wBishop(White):
     def __init__(self,y, x):
         self.val = 3
 
@@ -163,7 +329,7 @@ class wBishop():
         screen.blit(white["bishop"], (posx, posy))
 
 
-class wPawn():
+class wPawn(White):
     def __init__(self, y, x):
         self.val = 1
 
@@ -204,6 +370,19 @@ def gameStart():
     ]
     return array
 
+def gameStart(): #for testing
+    array=[
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, bRook(5,4), wRook(5,5), 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+    return array
+
 def showPieces(array):
     for row in array:
         for p in row:
@@ -216,8 +395,9 @@ def main():
     drawGrid(surface)
     alive=True
     array=gameStart()
-    while (alive):
 
+
+    while (alive):
         pygame.time.Clock().tick(10)#slow game down
         drawGrid(surface)
         screen.blit(surface, (0, 0))
@@ -227,6 +407,6 @@ def main():
 
         showPieces(array)
 
-
+        #print(array[3][3].legal(array))
         pygame.display.update()
 main()
