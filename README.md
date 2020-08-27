@@ -11,11 +11,13 @@ Goals:
 - preventing player from not deffending king(illegal)
 - show check/checkmate
 - show previous move
+- surrender button
 - clock(+increment)
 - sounds
 - different game modes
 - bots
 - turn board
+- online?
 - ?
 
 img:
