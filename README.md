@@ -1,11 +1,15 @@
 # Chess
 Trying to recreate the game chess (without the chess library)
 
+screenshot:
+![GitHub Logo](Img/Screenshot1.png)
+
+
 done:
 - Board 
+- add pieces
 
 Goals:
-- add pieces
 - Pieces move correctly (inc. castle, enpassant etc.)
 - show legal moves
 - preventing player from not deffending king(illegal)
