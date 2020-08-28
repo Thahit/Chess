@@ -8,9 +8,11 @@ screenshot:
 done:
 - Board 
 - add pieces
+- moveset of pieces
 
 Goals:
-- Pieces move correctly (inc. castle, enpassant etc.)
+- Pieces move correctly 
+- castle, enpassant etc
 - show legal moves
 - preventing player from not deffending king(illegal)
 - show check/checkmate
