@@ -944,18 +944,18 @@ def gameStart():
     ]
     return array
 
-# def gameStart(): #for testing
-#     array=[
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, bBishop(7,3), 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
-#         [0, 0, 0, bKing(5,4),0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0]
-#     ]
-#     return array
+def gameStart(): #for testing
+    array=[
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [wKing(7,1), 0, bBishop(7,3), 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
+        [0, 0, 0, bKing(5,4),0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+    return array
 
 def showPieces(array):#draw all pieces
     for row in array:
@@ -996,48 +996,136 @@ def main():
                                 l = selectPieceLegal(array, 0, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][0]=selected
+                                selected.y=8
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border <event.pos[1] < border +gridsize):#(8,2)
                         if selected == None:
                             if array[0][1] !=0:
                                 l = selectPieceLegal(array, 0, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][1]=selected
+                                selected.y=8
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border < event.pos[1] < border + gridsize):# (8,3)
                         if selected == None:
                             if array[0][2] != 0:
                                 l = selectPieceLegal(array, 0, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][2]=selected
+                                selected.y=8
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border < event.pos[1] < border + gridsize):# (8,4)
                         if selected == None:
                             if array[0][3] != 0:
                                 l = selectPieceLegal(array, 0, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][3]=selected
+                                selected.y=8
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border < event.pos[1] < border + gridsize):# (8,5)
                         if selected == None:
                             if array[0][4] != 0:
                                 l = selectPieceLegal(array, 0, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][4]=selected
+                                selected.y=8
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border < event.pos[1] < border + gridsize):# (8,6)
                         if selected == None:
                             if array[0][5] != 0:
                                 l = selectPieceLegal(array, 0, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][5]=selected
+                                selected.y=8
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border < event.pos[1] < border + gridsize):# (8,7)
                         if selected == None:
                             if array[0][6] != 0:
                                 l = selectPieceLegal(array, 0, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][6]=selected
+                                selected.y=8
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border < event.pos[1] < border + gridsize):# (8,8)
                         if selected == None:
                             if array[0][7] != 0:
                                 l = selectPieceLegal(array, 0, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (0,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[0][7]=selected
+                                selected.y=8
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row7
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,1)
                         if selected == None:
@@ -1045,48 +1133,136 @@ def main():
                                 l = selectPieceLegal(array, 1, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][0]=selected
+                                selected.y=7
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,2)
                         if selected == None:
                             if array[1][1] !=0:
                                 l = selectPieceLegal(array, 1, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][1]=selected
+                                selected.y=7
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,3)
                         if selected == None:
                             if array[1][2] != 0:
                                 l = selectPieceLegal(array, 1, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][2]=selected
+                                selected.y=7
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,4)
                         if selected == None:
                             if array[1][3] != 0:
                                 l = selectPieceLegal(array, 1, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][3]=selected
+                                selected.y=7
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,5)
                         if selected == None:
                             if array[1][4] != 0:
                                 l = selectPieceLegal(array, 1, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][4]=selected
+                                selected.y=7
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,6)
                         if selected == None:
                             if array[1][5] != 0:
                                 l = selectPieceLegal(array, 1, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][5]=selected
+                                selected.y=7
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,7)
                         if selected == None:
                             if array[1][6] != 0:
                                 l = selectPieceLegal(array, 1, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][6]=selected
+                                selected.y=7
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,8)
                         if selected == None:
                             if array[1][7] != 0:
                                 l = selectPieceLegal(array, 1, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (1,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[1][7]=selected
+                                selected.y=7
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row6
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,1)
                         if selected == None:
@@ -1094,48 +1270,136 @@ def main():
                                 l = selectPieceLegal(array, 2, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][0]=selected
+                                selected.y=6
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,2)
                         if selected == None:
                             if array[2][1] !=0:
                                 l = selectPieceLegal(array, 2, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][1]=selected
+                                selected.y=6
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,3)
                         if selected == None:
                             if array[2][2] != 0:
                                 l = selectPieceLegal(array, 2, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][2]=selected
+                                selected.y=6
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,4)
                         if selected == None:
                             if array[2][3] != 0:
                                 l = selectPieceLegal(array, 2, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][3]=selected
+                                selected.y=6
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,5)
                         if selected == None:
                             if array[2][4] != 0:
                                 l = selectPieceLegal(array, 2, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][4]=selected
+                                selected.y=6
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,6)
                         if selected == None:
                             if array[2][5] != 0:
                                 l = selectPieceLegal(array, 2, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][5]=selected
+                                selected.y=6
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,7)
                         if selected == None:
                             if array[2][6] != 0:
                                 l = selectPieceLegal(array, 2, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][6]=selected
+                                selected.y=6
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,8)
                         if selected == None:
                             if array[2][7] != 0:
                                 l = selectPieceLegal(array, 2, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (2,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[2][7]=selected
+                                selected.y=6
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row 5
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,1)
                         if selected == None:
@@ -1143,48 +1407,136 @@ def main():
                                 l = selectPieceLegal(array, 3, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][0]=selected
+                                selected.y=5
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,2)
                         if selected == None:
                             if array[3][1] !=0:
                                 l = selectPieceLegal(array, 3, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][1]=selected
+                                selected.y=5
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,3)
                         if selected == None:
                             if array[3][2] != 0:
                                 l = selectPieceLegal(array, 3, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][2]=selected
+                                selected.y=5
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,4)
                         if selected == None:
                             if array[3][3] != 0:
                                 l = selectPieceLegal(array, 3, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][3]=selected
+                                selected.y=5
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,5)
                         if selected == None:
                             if array[3][4] != 0:
                                 l = selectPieceLegal(array, 3, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][4]=selected
+                                selected.y=5
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,6)
                         if selected == None:
                             if array[3][5] != 0:
                                 l = selectPieceLegal(array, 3, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][5]=selected
+                                selected.y=5
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,7)
                         if selected == None:
                             if array[3][6] != 0:
                                 l = selectPieceLegal(array, 3, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][6]=selected
+                                selected.y=5
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,8)
                         if selected == None:
                             if array[3][7] != 0:
                                 l = selectPieceLegal(array, 3, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (3,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[3][7]=selected
+                                selected.y=5
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row 4
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,1)
                         if selected == None:
@@ -1192,48 +1544,136 @@ def main():
                                 l = selectPieceLegal(array, 4, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][0]=selected
+                                selected.y=4
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,2)
                         if selected == None:
                             if array[4][1] !=0:
                                 l = selectPieceLegal(array, 4, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][1]=selected
+                                selected.y=4
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,3)
                         if selected == None:
                             if array[4][2] != 0:
                                 l = selectPieceLegal(array, 4, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][2]=selected
+                                selected.y=4
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,4)
                         if selected == None:
                             if array[4][3] != 0:
                                 l = selectPieceLegal(array, 4, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][3]=selected
+                                selected.y=4
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,5)
                         if selected == None:
                             if array[4][4] != 0:
                                 l = selectPieceLegal(array, 4, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][4]=selected
+                                selected.y=4
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,6)
                         if selected == None:
                             if array[4][5] != 0:
                                 l = selectPieceLegal(array, 4, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][5]=selected
+                                selected.y=4
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,7)
                         if selected == None:
                             if array[4][6] != 0:
                                 l = selectPieceLegal(array, 4, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][6]=selected
+                                selected.y=4
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,8)
                         if selected == None:
                             if array[4][7] != 0:
                                 l = selectPieceLegal(array, 4, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (4,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[4][7]=selected
+                                selected.y=4
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row3
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,1)
                         if selected == None:
@@ -1241,48 +1681,136 @@ def main():
                                 l = selectPieceLegal(array, 5, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][0]=selected
+                                selected.y=3
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,2)
                         if selected == None:
                             if array[5][1] !=0:
                                 l = selectPieceLegal(array, 5, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][1]=selected
+                                selected.y=3
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,3)
                         if selected == None:
                             if array[5][2] != 0:
                                 l = selectPieceLegal(array, 5, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][2]=selected
+                                selected.y=3
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,4)
                         if selected == None:
                             if array[5][3] != 0:
                                 l = selectPieceLegal(array, 5, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][3]=selected
+                                selected.y=3
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,5)
                         if selected == None:
                             if array[5][4] != 0:
                                 l = selectPieceLegal(array, 5, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][4]=selected
+                                selected.y=3
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,6)
                         if selected == None:
                             if array[5][5] != 0:
                                 l = selectPieceLegal(array, 5, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][5]=selected
+                                selected.y=3
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,7)
                         if selected == None:
                             if array[5][6] != 0:
                                 l = selectPieceLegal(array, 5, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][6]=selected
+                                selected.y=3
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,8)
                         if selected == None:
                             if array[5][7] != 0:
                                 l = selectPieceLegal(array, 5, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (5,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[5][7]=selected
+                                selected.y=3
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row2
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,1)
                         if selected == None:
@@ -1290,48 +1818,136 @@ def main():
                                 l = selectPieceLegal(array, 6, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][0]=selected
+                                selected.y=2
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,2)
                         if selected == None:
                             if array[6][1] ==0:
                                 l = selectPieceLegal(array, 6, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][2]=selected
+                                selected.y=2
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,3)
                         if selected == None:
                             if array[6][2] != 0:
                                 l = selectPieceLegal(array, 6, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][2]=selected
+                                selected.y=2
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,4)
                         if selected == None:
                             if array[6][3] != 0:
                                 l = selectPieceLegal(array, 6, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][3]=selected
+                                selected.y=2
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,5)
                         if selected == None:
                             if array[6][4] != 0:
                                 l = selectPieceLegal(array, 6, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][4]=selected
+                                selected.y=2
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,6)
                         if selected == None:
                             if array[6][5] != 0:
                                 l = selectPieceLegal(array, 6, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][5]=selected
+                                selected.y=2
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,7)
                         if selected == None:
                             if array[6][6] != 0:
                                 l = selectPieceLegal(array, 6, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][6]=selected
+                                selected.y=2
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,8)
                         if selected == None:
                             if array[6][7] != 0:
                                 l = selectPieceLegal(array, 6, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (6,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[6][7]=selected
+                                selected.y=2
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     #row1
                     elif (border <event.pos[0] < border +gridsize) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,1)
                         if selected == None:
@@ -1339,48 +1955,136 @@ def main():
                                 l = selectPieceLegal(array, 7, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,0) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][0]=selected
+                                selected.y=1
+                                selected.x=1
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,2)
                         if selected == None:
                             if array[7][1] !=0:
                                 l = selectPieceLegal(array, 7, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,1) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][1]=selected
+                                selected.y=1
+                                selected.x=2
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,3)
                         if selected == None:
                             if array[7][2] != 0:
                                 l = selectPieceLegal(array, 7, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,2) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][2]=selected
+                                selected.y=1
+                                selected.x=3
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,4)
                         if selected == None:
                             if array[7][3] != 0:
                                 l = selectPieceLegal(array, 7, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,3) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][3]=selected
+                                selected.y=1
+                                selected.x=4
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,5)
                         if selected == None:
                             if array[7][4] != 0:
                                 l = selectPieceLegal(array, 7, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,4) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][4]=selected
+                                selected.y=1
+                                selected.x=5
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,6)
                         if selected == None:
                             if array[7][5] != 0:
                                 l = selectPieceLegal(array, 7, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,5) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][5]=selected
+                                selected.y=1
+                                selected.x=6
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,7)
                         if selected == None:
                             if array[7][6] != 0:
                                 l = selectPieceLegal(array, 7, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,6) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][6]=selected
+                                selected.y=1
+                                selected.x=7
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
                     elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,8)
                         if selected == None:
                             if array[7][7] != 0:
                                 l = selectPieceLegal(array, 7, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
+                        else:#selected piece
+                            if (7,7) in selected.legal(array):#possible move
+                                array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
+                                array[7][7]=selected
+                                selected.y=1
+                                selected.x=8
+                                selected=None
+                            else:# illegal move
+                                screen.fill((255, 0, 0))#red blink =mistake
+                                selected=None
+
 
                 elif event.button ==3:  #right mouse button  => unselect
                     selected=None
