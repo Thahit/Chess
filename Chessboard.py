@@ -8,7 +8,6 @@ black={"king": pygame.image.load("img/bKing.png"), "queen": pygame.image.load("i
        "bishop": pygame.image.load("img/bBishop.png"),"knight":pygame.image.load("img/bKnight.png"), "pawn":pygame.image.load("img/bPawn.png")}
 
 
-
 #window
 pygame.init()
 pygame.display.set_caption("Chess")
@@ -30,8 +29,7 @@ class Black(ABC):
     def arraypos(self, array):  # where is it in array
         return (8 - self.y, self.x - 1)
 
-    def show(self):
-        pass
+
 
 class White(ABC):
     def __init__(self, y, x):
@@ -40,8 +38,8 @@ class White(ABC):
 
     def arraypos(self, array):  # where is it in array
         return (8 - self.y, self.x - 1)
-    def show(self):
-        pass
+
+
 #get pos from index
 def idxToPos(tuple): #not sure if ti will get used
     x=tuple[0]+8
@@ -138,6 +136,45 @@ class bKing(Black):
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["king"],(posx,posy))
 
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        #right down
+        if idx[0] + 1 <8 and idx[1] + 1<8:
+            if field[idx[0] + 1][idx[1] + 1] == 0 or isinstance(field[idx[0] + 1][idx[1] + 1], White):  # no piece/enemy
+                legal.append((idx[0] + 1, idx[1] + 1))
+        #right
+        if idx[1] + 1<8:
+            if field[idx[0] ][idx[1] + 1] == 0 or isinstance(field[idx[0] ][idx[1] + 1], White):  # no piece/enemy
+                legal.append((idx[0], idx[1] + 1))
+        #right up
+        if idx[0] - 1 >=0 and idx[1] + 1<8:
+            if field[idx[0] - 1][idx[1] + 1] == 0 or isinstance(field[idx[0] - 1][idx[1] + 1], White):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] + 1))
+        #up
+        if idx[0] - 1 >=0:
+            if field[idx[0] - 1][idx[1] ] == 0 or isinstance(field[idx[0] - 1][idx[1] ], White):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] ))
+        #left up
+        if idx[0] - 1 >=0 and idx[1] - 1>=0:
+            if field[idx[0] - 1][idx[1] - 1] == 0 or isinstance(field[idx[0] - 1][idx[1] - 1], White):  # no piece/enemy
+                legal.append((idx[0] -1, idx[1] - 1))
+        #left
+        if  idx[1] - 1>=0:
+            if field[idx[0] ][idx[1] - 1] == 0 or isinstance(field[idx[0] ][idx[1] - 1], White):  # no piece/enemy
+                legal.append((idx[0] , idx[1] - 1))
+        #left down
+        if idx[0] + 1 <8 and idx[1] - 1>=0:
+            if field[idx[0] + 1][idx[1] - 1] == 0 or isinstance(field[idx[0] + 1][idx[1] - 1], White):  # no piece/enemy
+                legal.append((idx[0] +1, idx[1] - 1))
+        #down
+        if idx[0] + 1 <8:
+            if field[idx[0] + 1][idx[1] ] == 0 or isinstance(field[idx[0] + 1][idx[1] ], White):  # no piece/enemy
+                legal.append((idx[0] +1, idx[1] ))
+
+        return legal
+
 
 
 class bKnight(Black):
@@ -151,6 +188,43 @@ class bKnight(Black):
         posx=(self.x-1)*gridsize+border+5
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["knight"],(posx,posy))
+
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+        #right down
+        if idx[0] + 2 <8 and idx[1] + 1<8:
+            if field[idx[0] + 2][idx[1] + 1] == 0 or isinstance(field[idx[0] + 2][idx[1] + 1], White):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] + 1))
+        if idx[0] + 1 < 8 and idx[1] + 2 < 8:
+            if field[idx[0] + 1][idx[1] + 2] == 0 or isinstance(field[idx[0] + 1][idx[1] + 2], White):  # no piece/enemy
+                legal.append((idx[0] + 1, idx[1] + 2))
+
+        #right up
+        if idx[0] + 2 <8 and idx[1] - 1>=0:
+            if field[idx[0] + 2][idx[1] - 1] == 0 or isinstance(field[idx[0] + 2][idx[1] - 1], White):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] - 1))
+        if idx[0] + 1 < 8 and idx[1] - 2 >=0:
+            if field[idx[0] + 1][idx[1] - 2] == 0 or isinstance(field[idx[0] + 1][idx[1] - 2], White):  # no piece/enemy
+                legal.append((idx[0] + 1, idx[1] - 2))
+
+        #left up
+        if idx[0] - 2 >=0 and idx[1] - 1>=0:
+            if field[idx[0] - 2][idx[1] - 1] == 0 or isinstance(field[idx[0] - 2][idx[1] - 1], White):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] - 1))
+        if idx[0] - 1 >=0 and idx[1] - 2 >=0:
+            if field[idx[0] - 1][idx[1] - 2] == 0 or isinstance(field[idx[0] - 1][idx[1] - 2], White):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] - 2))
+
+        #left down
+        if idx[0] - 2 >=0 and idx[1] + 1<8:
+            if field[idx[0] - 2][idx[1] + 1] == 0 or isinstance(field[idx[0] - 2][idx[1] + 1], White):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] + 1))
+        if idx[0] - 1 >=0 and idx[1] + 2 <8:
+            if field[idx[0] - 1][idx[1] + 2] == 0 or isinstance(field[idx[0] - 1][idx[1] + 2], White):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] + 2))
+
+        return legal
 
 
 class bQueen(Black):
@@ -384,8 +458,29 @@ class bPawn(Black):
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["pawn"],(posx,posy))
 
+    def legal(self, field): # show legal moves   works
+        idx= self.arraypos(field)  #return tuple(idx1, idx2)
+        legal=[] #list of legal moves
+
+        if idx[0] + 1 <8 and idx[1] + 1<8:#take right
+            if isinstance(field[idx[0] + 1][idx[1] + 1], White):  # enemy
+                legal.append((idx[0] + 1, idx[1] + 1))
+
+        if idx[0] + 1 <8 and idx[1] - 1>=0:#take left
+            if isinstance(field[idx[0] + 1][idx[1] - 1], White):  # enemy
+                legal.append((idx[0] + 1, idx[1] - 1))
+
+        # walk
+        if idx[0] + 1 <8 :
+            if field[idx[0] + 1][idx[1] ] == 0 :  # no piece
+                legal.append((idx[0] + 1, idx[1] ))
+
+        if idx[0] + 2 <8 :
+            if field[idx[0] + 2][idx[1] ] == 0:  # no piece
+                legal.append((idx[0] + 2, idx[1] ))
 
 
+###############################White#############################################
 class wRook(White):
     def __init__(self, y, x):
         self.val = 5
@@ -477,6 +572,48 @@ class wKing(White):
         posy = (8 - self.y) * gridsize + border + 5
         screen.blit(white["king"], (posx, posy))
 
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        #right down
+        if idx[0] + 1 <8 and idx[1] + 1<8:
+            if field[idx[0] + 1][idx[1] + 1] == 0 or isinstance(field[idx[0] + 1][idx[1] + 1], Black):  # no piece/enemy
+                legal.append((idx[0] + 1, idx[1] + 1))
+        #right
+        if idx[1] + 1<8:
+            if field[idx[0] ][idx[1] + 1] == 0 or isinstance(field[idx[0] ][idx[1] + 1], Black):  # no piece/enemy
+                legal.append((idx[0], idx[1] + 1))
+        #right up
+        if idx[0] - 1 >=0 and idx[1] + 1<8:
+            if field[idx[0] - 1][idx[1] + 1] == 0 or isinstance(field[idx[0] - 1][idx[1] + 1], Black):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] + 1))
+        #up
+        if idx[0] - 1 >=0:
+            if field[idx[0] - 1][idx[1] ] == 0 or isinstance(field[idx[0] - 1][idx[1] ], Black):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] ))
+        #left up
+        if idx[0] - 1 >=0 and idx[1] - 1>=0:
+            if field[idx[0] - 1][idx[1] - 1] == 0 or isinstance(field[idx[0] - 1][idx[1] - 1], Black):  # no piece/enemy
+                legal.append((idx[0] -1, idx[1] - 1))
+        #left
+        if  idx[1] - 1>=0:
+            if field[idx[0] ][idx[1] - 1] == 0 or isinstance(field[idx[0] ][idx[1] - 1], Black):  # no piece/enemy
+                legal.append((idx[0] , idx[1] - 1))
+        #left down
+        if idx[0] + 1 <8 and idx[1] - 1>=0:
+            if field[idx[0] + 1][idx[1] - 1] == 0 or isinstance(field[idx[0] + 1][idx[1] - 1], Black):  # no piece/enemy
+                legal.append((idx[0] +1, idx[1] - 1))
+        #down
+        if idx[0] + 1 <8:
+            if field[idx[0] + 1][idx[1] ] == 0 or isinstance(field[idx[0] + 1][idx[1] ], Black):  # no piece/enemy
+                legal.append((idx[0] +1, idx[1] ))
+
+        return legal
+
+
+
+
 
 
 class wKnight(White):
@@ -490,6 +627,45 @@ class wKnight(White):
         posx = (self.x - 1) * gridsize + border + 5
         posy = (8 - self.y) * gridsize + border + 5
         screen.blit(white["knight"], (posx, posy))
+
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+        #right down
+        if idx[0] + 2 <8 and idx[1] + 1<8:
+            if field[idx[0] + 2][idx[1] + 1] == 0 or isinstance(field[idx[0] + 2][idx[1] + 1], Black):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] + 1))
+        if idx[0] + 1 < 8 and idx[1] + 2 < 8:
+            if field[idx[0] + 1][idx[1] + 2] == 0 or isinstance(field[idx[0] + 1][idx[1] + 2], Black):  # no piece/enemy
+                legal.append((idx[0] + 1, idx[1] + 2))
+
+        #right up
+        if idx[0] + 2 <8 and idx[1] - 1>=0:
+            if field[idx[0] + 2][idx[1] - 1] == 0 or isinstance(field[idx[0] + 2][idx[1] - 1], Black):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] - 1))
+        if idx[0] + 1 < 8 and idx[1] - 2 >=0:
+            if field[idx[0] + 1][idx[1] - 2] == 0 or isinstance(field[idx[0] + 1][idx[1] - 2], Black):  # no piece/enemy
+                legal.append((idx[0] + 1, idx[1] - 2))
+
+        #left up
+        if idx[0] - 2 >=0 and idx[1] - 1>=0:
+            if field[idx[0] - 2][idx[1] - 1] == 0 or isinstance(field[idx[0] - 2][idx[1] - 1], Black):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] - 1))
+        if idx[0] - 1 >=0 and idx[1] - 2 >=0:
+            if field[idx[0] - 1][idx[1] - 2] == 0 or isinstance(field[idx[0] - 1][idx[1] - 2], Black):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] - 2))
+
+        #left down
+        if idx[0] - 2 >=0 and idx[1] + 1<8:
+            if field[idx[0] - 2][idx[1] + 1] == 0 or isinstance(field[idx[0] - 2][idx[1] + 1], Black):  # no piece/enemy
+                legal.append((idx[0] + 2, idx[1] + 1))
+        if idx[0] - 1 >=0 and idx[1] + 2 <8:
+            if field[idx[0] - 1][idx[1] + 2] == 0 or isinstance(field[idx[0] - 1][idx[1] + 2], Black):  # no piece/enemy
+                legal.append((idx[0] - 1, idx[1] + 2))
+
+        return legal
+
+
 
 
 class wQueen(White):
@@ -722,10 +898,28 @@ class wPawn(White):
         posy = (8 - self.y) * gridsize + border + 5
         screen.blit(white["pawn"], (posx, posy))
 
+    def legal(self, field):  # show legal moves   works
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        if idx[0] - 1 >= 0 and idx[1] + 1 < 8:  # take right
+            if isinstance(field[idx[0] + 1][idx[1] + 1], Black):  # enemy
+                legal.append((idx[0] - 1, idx[1] + 1))
+
+        if idx[0] - 1 >= 0 and idx[1] - 1 >= 0:  # take left
+            if isinstance(field[idx[0] - 1][idx[1] - 1], Black):  # enemy
+                legal.append((idx[0] - 1, idx[1] - 1))
+
+        # walk
+        if idx[0] - 1 >= 0:
+            if field[idx[0] - 1][idx[1]] == 0:  # no piece
+                legal.append((idx[0] - 1, idx[1]))
+
+        if idx[0] - 2 >= 0:
+            if field[idx[0] - 2][idx[1]] == 0 :  # no piece
+                legal.append((idx[0] - 2, idx[1]))
 
 #________________________________________________________________________________________________
-
-
 
 
 def drawGrid(surface):
@@ -754,9 +948,9 @@ def gameStart():
 def gameStart(): #for testing
     array=[
         [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, wBishop(6,3), 0, wBishop(6,5), 0, 0, 0],
-        [0, 0, 0, bQueen(5,4),0, 0, 0, 0],
+        [0, 0, bBishop(7,3), 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
+        [0, 0, 0, bKing(5,4),0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -790,4 +984,6 @@ def main():
 
         print(array[3][3].legal(array))
         pygame.display.update()
-main()
+
+if __name__ =="__main__":
+    main()
