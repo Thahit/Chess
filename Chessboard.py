@@ -480,6 +480,8 @@ class bPawn(Black):
             if field[idx[0] + 2][idx[1] ] == 0:  # no piece
                 legal.append((idx[0] + 2, idx[1] ))
 
+        return legal
+
 ###############################White#############################################
 class wRook(White):
     def __init__(self, y, x):
@@ -914,6 +916,7 @@ class wPawn(White):
         if idx[0] - 2 >= 0:
             if field[idx[0] - 2][idx[1]] == 0 :  # no piece
                 legal.append((idx[0] - 2, idx[1]))
+        return legal
 
 #________________________________________________________________________________________________
 
@@ -941,18 +944,18 @@ def gameStart():
     ]
     return array
 
-def gameStart(): #for testing
-    array=[
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, bBishop(7,3), 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
-        [0, 0, 0, bKing(5,4),0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
-    ]
-    return array
+# def gameStart(): #for testing
+#     array=[
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, bBishop(7,3), 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
+#         [0, 0, 0, bKing(5,4),0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0]
+#     ]
+#     return array
 
 def showPieces(array):#draw all pieces
     for row in array:
@@ -986,331 +989,394 @@ def main():
             #mousebuttons
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button==1: #= if leftclick
-                    if selected==None:  # makeing the controlls for selected and unselected looks stupid, but checking later makes it way more annoying in my oppinion ( but this version looks more stupid)
-                        #row 8
-                        if (border <event.pos[0] < border +gridsize) and (border <event.pos[1] < border +gridsize):#(8,1)
+                    #row 8
+                    if (border <event.pos[0] < border +gridsize) and (border <event.pos[1] < border +gridsize):#(8,1)
+                        if selected == None:
                             if array[0][0] !=0:
                                 l = selectPieceLegal(array, 0, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border <event.pos[1] < border +gridsize):#(8,2)
+                    elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border <event.pos[1] < border +gridsize):#(8,2)
+                        if selected == None:
                             if array[0][1] !=0:
                                 l = selectPieceLegal(array, 0, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border < event.pos[1] < border + gridsize):# (8,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border < event.pos[1] < border + gridsize):# (8,3)
+                        if selected == None:
                             if array[0][2] != 0:
                                 l = selectPieceLegal(array, 0, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border < event.pos[1] < border + gridsize):# (8,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border < event.pos[1] < border + gridsize):# (8,4)
+                        if selected == None:
                             if array[0][3] != 0:
                                 l = selectPieceLegal(array, 0, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border < event.pos[1] < border + gridsize):# (8,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border < event.pos[1] < border + gridsize):# (8,5)
+                        if selected == None:
                             if array[0][4] != 0:
                                 l = selectPieceLegal(array, 0, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border < event.pos[1] < border + gridsize):# (8,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border < event.pos[1] < border + gridsize):# (8,6)
+                        if selected == None:
                             if array[0][5] != 0:
                                 l = selectPieceLegal(array, 0, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border < event.pos[1] < border + gridsize):# (8,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border < event.pos[1] < border + gridsize):# (8,7)
+                        if selected == None:
                             if array[0][6] != 0:
                                 l = selectPieceLegal(array, 0, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border < event.pos[1] < border + gridsize):# (8,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border < event.pos[1] < border + gridsize):# (8,8)
+                        if selected == None:
                             if array[0][7] != 0:
                                 l = selectPieceLegal(array, 0, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row7
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,1)
+                    #row7
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,1)
+                        if selected == None:
                             if array[1][0] !=0:
                                 l = selectPieceLegal(array, 1, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,2)
+                    elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,2)
+                        if selected == None:
                             if array[1][1] !=0:
                                 l = selectPieceLegal(array, 1, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,3)
+                        if selected == None:
                             if array[1][2] != 0:
                                 l = selectPieceLegal(array, 1, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,4)
+                        if selected == None:
                             if array[1][3] != 0:
                                 l = selectPieceLegal(array, 1, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,5)
+                        if selected == None:
                             if array[1][4] != 0:
                                 l = selectPieceLegal(array, 1, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,6)
+                        if selected == None:
                             if array[1][5] != 0:
                                 l = selectPieceLegal(array, 1, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,7)
+                        if selected == None:
                             if array[1][6] != 0:
                                 l = selectPieceLegal(array, 1, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,8)
+                        if selected == None:
                             if array[1][7] != 0:
                                 l = selectPieceLegal(array, 1, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row6
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,1)
+                    #row6
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,1)
+                        if selected == None:
                             if array[2][0] !=0:
                                 l = selectPieceLegal(array, 2, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,2)
+                    elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,2)
+                        if selected == None:
                             if array[2][1] !=0:
                                 l = selectPieceLegal(array, 2, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,3)
+                        if selected == None:
                             if array[2][2] != 0:
                                 l = selectPieceLegal(array, 2, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,4)
+                        if selected == None:
                             if array[2][3] != 0:
                                 l = selectPieceLegal(array, 2, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,5)
+                        if selected == None:
                             if array[2][4] != 0:
                                 l = selectPieceLegal(array, 2, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,6)
+                        if selected == None:
                             if array[2][5] != 0:
                                 l = selectPieceLegal(array, 2, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,7)
+                        if selected == None:
                             if array[2][6] != 0:
                                 l = selectPieceLegal(array, 2, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,8)
+                        if selected == None:
                             if array[2][7] != 0:
                                 l = selectPieceLegal(array, 2, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row 5
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,1)
+                    #row 5
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,1)
+                        if selected == None:
                             if array[3][0] !=0:
                                 l = selectPieceLegal(array, 3, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,2)
+                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,2)
+                        if selected == None:
                             if array[3][1] !=0:
                                 l = selectPieceLegal(array, 3, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,3)
+                        if selected == None:
                             if array[3][2] != 0:
                                 l = selectPieceLegal(array, 3, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,4)
+                        if selected == None:
                             if array[3][3] != 0:
                                 l = selectPieceLegal(array, 3, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,5)
+                        if selected == None:
                             if array[3][4] != 0:
                                 l = selectPieceLegal(array, 3, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,6)
+                        if selected == None:
                             if array[3][5] != 0:
                                 l = selectPieceLegal(array, 3, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,7)
+                        if selected == None:
                             if array[3][6] != 0:
                                 l = selectPieceLegal(array, 3, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,8)
+                        if selected == None:
                             if array[3][7] != 0:
                                 l = selectPieceLegal(array, 3, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row 4
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,1)
+                    #row 4
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,1)
+                        if selected == None:
                             if array[4][0] !=0:
                                 l = selectPieceLegal(array, 4, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,2)
+                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,2)
+                        if selected == None:
                             if array[4][1] !=0:
                                 l = selectPieceLegal(array, 4, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,3)
+                        if selected == None:
                             if array[4][2] != 0:
                                 l = selectPieceLegal(array, 4, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,4)
+                        if selected == None:
                             if array[4][3] != 0:
                                 l = selectPieceLegal(array, 4, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,5)
+                        if selected == None:
                             if array[4][4] != 0:
                                 l = selectPieceLegal(array, 4, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,6)
+                        if selected == None:
                             if array[4][5] != 0:
                                 l = selectPieceLegal(array, 4, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,7)
+                        if selected == None:
                             if array[4][6] != 0:
                                 l = selectPieceLegal(array, 4, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,8)
+                        if selected == None:
                             if array[4][7] != 0:
                                 l = selectPieceLegal(array, 4, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row3
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,1)
+                    #row3
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,1)
+                        if selected == None:
                             if array[5][0] !=0:
                                 l = selectPieceLegal(array, 5, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,2)
+                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,2)
+                        if selected == None:
                             if array[5][1] !=0:
                                 l = selectPieceLegal(array, 5, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,3)
+                        if selected == None:
                             if array[5][2] != 0:
                                 l = selectPieceLegal(array, 5, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,4)
+                        if selected == None:
                             if array[5][3] != 0:
                                 l = selectPieceLegal(array, 5, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,5)
+                        if selected == None:
                             if array[5][4] != 0:
                                 l = selectPieceLegal(array, 5, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,6)
+                        if selected == None:
                             if array[5][5] != 0:
                                 l = selectPieceLegal(array, 5, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,7)
+                        if selected == None:
                             if array[5][6] != 0:
                                 l = selectPieceLegal(array, 5, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,8)
+                        if selected == None:
                             if array[5][7] != 0:
                                 l = selectPieceLegal(array, 5, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row2
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,1)
+                    #row2
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,1)
+                        if selected == None:
                             if array[6][0] !=0:
                                 l = selectPieceLegal(array, 6, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,2)
+                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,2)
+                        if selected == None:
                             if array[6][1] ==0:
                                 l = selectPieceLegal(array, 6, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,3)
+                        if selected == None:
                             if array[6][2] != 0:
                                 l = selectPieceLegal(array, 6, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,4)
+                        if selected == None:
                             if array[6][3] != 0:
                                 l = selectPieceLegal(array, 6, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,5)
+                        if selected == None:
                             if array[6][4] != 0:
                                 l = selectPieceLegal(array, 6, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,6)
+                        if selected == None:
                             if array[6][5] != 0:
                                 l = selectPieceLegal(array, 6, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,7)
+                        if selected == None:
                             if array[6][6] != 0:
                                 l = selectPieceLegal(array, 6, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,8)
+                        if selected == None:
                             if array[6][7] != 0:
                                 l = selectPieceLegal(array, 6, 7)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        #row1
-                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,1)
+                    #row1
+                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,1)
+                        if selected == None:
                             if array[7][0] !=0:
                                 l = selectPieceLegal(array, 7, 0)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,2)
+                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,2)
+                        if selected == None:
                             if array[7][1] !=0:
                                 l = selectPieceLegal(array, 7, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,3)
+                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,3)
+                        if selected == None:
                             if array[7][2] != 0:
                                 l = selectPieceLegal(array, 7, 2)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,4)
+                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,4)
+                        if selected == None:
                             if array[7][3] != 0:
                                 l = selectPieceLegal(array, 7, 3)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,5)
+                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,5)
+                        if selected == None:
                             if array[7][4] != 0:
                                 l = selectPieceLegal(array, 7, 4)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,6)
+                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,6)
+                        if selected == None:
                             if array[7][5] != 0:
                                 l = selectPieceLegal(array, 7, 5)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,7)
+                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,7)
+                        if selected == None:
                             if array[7][6] != 0:
                                 l = selectPieceLegal(array, 7, 6)
                                 if len(l[0])>0:
                                     selected=l[1]
-                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,8)
+                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,8)
+                        if selected == None:
                             if array[7][7] != 0:
                                 l = selectPieceLegal(array, 7, 7)
                                 if len(l[0])>0:
