@@ -19,8 +19,8 @@ pygame.display.set_caption("Chess")
 pygame.display.set_icon(pygame.image.load("img/bKnight.png"))
 
 gridsize=55
-width=700
 border=30
+width= gridsize*8+ 2*border
 height=gridsize*8+ 2*border
 font = pygame.font.Font('freesansbold.ttf', 20)
 screen = pygame.display.set_mode((width, height))
@@ -201,7 +201,7 @@ class bKnight(Black):
             if field[idx[0] + 1][idx[1] + 2] == 0 or isinstance(field[idx[0] + 1][idx[1] + 2], White):  # no piece/enemy
                 legal.append((idx[0] + 1, idx[1] + 2))
 
-        #right up
+        #left down
         if idx[0] + 2 <8 and idx[1] - 1>=0:
             if field[idx[0] + 2][idx[1] - 1] == 0 or isinstance(field[idx[0] + 2][idx[1] - 1], White):  # no piece/enemy
                 legal.append((idx[0] + 2, idx[1] - 1))
@@ -212,15 +212,15 @@ class bKnight(Black):
         #left up
         if idx[0] - 2 >=0 and idx[1] - 1>=0:
             if field[idx[0] - 2][idx[1] - 1] == 0 or isinstance(field[idx[0] - 2][idx[1] - 1], White):  # no piece/enemy
-                legal.append((idx[0] + 2, idx[1] - 1))
+                legal.append((idx[0] - 2, idx[1] - 1))
         if idx[0] - 1 >=0 and idx[1] - 2 >=0:
             if field[idx[0] - 1][idx[1] - 2] == 0 or isinstance(field[idx[0] - 1][idx[1] - 2], White):  # no piece/enemy
                 legal.append((idx[0] - 1, idx[1] - 2))
 
-        #left down
+        #right up
         if idx[0] - 2 >=0 and idx[1] + 1<8:
             if field[idx[0] - 2][idx[1] + 1] == 0 or isinstance(field[idx[0] - 2][idx[1] + 1], White):  # no piece/enemy
-                legal.append((idx[0] + 2, idx[1] + 1))
+                legal.append((idx[0] - 2, idx[1] + 1))
         if idx[0] - 1 >=0 and idx[1] + 2 <8:
             if field[idx[0] - 1][idx[1] + 2] == 0 or isinstance(field[idx[0] - 1][idx[1] + 2], White):  # no piece/enemy
                 legal.append((idx[0] - 1, idx[1] + 2))
@@ -639,7 +639,7 @@ class wKnight(White):
             if field[idx[0] + 1][idx[1] + 2] == 0 or isinstance(field[idx[0] + 1][idx[1] + 2], Black):  # no piece/enemy
                 legal.append((idx[0] + 1, idx[1] + 2))
 
-        #right up
+        #left down
         if idx[0] + 2 <8 and idx[1] - 1>=0:
             if field[idx[0] + 2][idx[1] - 1] == 0 or isinstance(field[idx[0] + 2][idx[1] - 1], Black):  # no piece/enemy
                 legal.append((idx[0] + 2, idx[1] - 1))
@@ -650,15 +650,15 @@ class wKnight(White):
         #left up
         if idx[0] - 2 >=0 and idx[1] - 1>=0:
             if field[idx[0] - 2][idx[1] - 1] == 0 or isinstance(field[idx[0] - 2][idx[1] - 1], Black):  # no piece/enemy
-                legal.append((idx[0] + 2, idx[1] - 1))
+                legal.append((idx[0] - 2, idx[1] - 1))
         if idx[0] - 1 >=0 and idx[1] - 2 >=0:
             if field[idx[0] - 1][idx[1] - 2] == 0 or isinstance(field[idx[0] - 1][idx[1] - 2], Black):  # no piece/enemy
                 legal.append((idx[0] - 1, idx[1] - 2))
 
-        #left down
+        #right up
         if idx[0] - 2 >=0 and idx[1] + 1<8:
             if field[idx[0] - 2][idx[1] + 1] == 0 or isinstance(field[idx[0] - 2][idx[1] + 1], Black):  # no piece/enemy
-                legal.append((idx[0] + 2, idx[1] + 1))
+                legal.append((idx[0] - 2, idx[1] + 1))
         if idx[0] - 1 >=0 and idx[1] + 2 <8:
             if field[idx[0] - 1][idx[1] + 2] == 0 or isinstance(field[idx[0] - 1][idx[1] + 2], Black):  # no piece/enemy
                 legal.append((idx[0] - 1, idx[1] + 2))
