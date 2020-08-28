@@ -10,9 +10,6 @@ black={"king": pygame.image.load("img/bKing.png"), "queen": pygame.image.load("i
        "rook": pygame.image.load("img/bRook.png"), "bishop": pygame.image.load("img/bBishop.png"),
        "knight": pygame.image.load("img/bKnight.png"), "pawn": pygame.image.load("img/bPawn.png")}
 
-whiteW={"king": "♔", "queen": "♕", "rook":"♖", "bishop": "♗","knight":"♘", "pawn":"♙"}
-blackW={"king": "♚", "queen": "♛", "rook":"♛", "bishop": "♝","knight":"♞", "pawn":"♟"}
-
 #window setting
 pygame.init()
 pygame.display.set_caption("Chess")
@@ -41,11 +38,6 @@ class White(ABC):
     def arraypos(self, array):  # where is it in array
         return (8 - self.y, self.x - 1)
 
-#get pos from index
-def idxToPos(tuple): #not sure if ti will get used
-    x=tuple[0]+8
-    y=tuple[1]+1
-    return (x,y)
 #___________________________pieces___________________________________________________________________________
 class bRook(Black):
     def __init__(self, y, x):
@@ -124,7 +116,6 @@ class bRook(Black):
 
         return legal
 
-
 class bKing(Black):
     def __init__(self, y, x):
         self.val = float("inf")
@@ -176,8 +167,6 @@ class bKing(Black):
 
         return legal
 
-
-
 class bKnight(Black):
     def __init__(self, y, x):
         self.val = 5
@@ -226,7 +215,6 @@ class bKnight(Black):
                 legal.append((idx[0] - 1, idx[1] + 2))
 
         return legal
-
 
 class bQueen(Black):
     def __init__(self, y, x):
@@ -367,7 +355,6 @@ class bQueen(Black):
         return legal
 
 
-
 class bBishop(Black):
     def __init__(self, y, x):
         self.val = 3
@@ -445,7 +432,6 @@ class bBishop(Black):
                 rdown = False
 
         return legal
-
 
 class bPawn(Black):
     def __init__(self, y, x):
@@ -561,7 +547,6 @@ class wRook(White):
 
         return legal
 
-
 class wKing(White):
     def __init__(self, y, x):
         self.val = float("inf")
@@ -613,9 +598,6 @@ class wKing(White):
 
         return legal
 
-
-
-
 class wKnight(White):
     def __init__(self, y, x):
         self.val = 3
@@ -664,7 +646,6 @@ class wKnight(White):
                 legal.append((idx[0] - 1, idx[1] + 2))
 
         return legal
-
 
 class wQueen(White):
     def __init__(self, y, x):
@@ -804,7 +785,6 @@ class wQueen(White):
 
         return legal
 
-
 class wBishop(White):
     def __init__(self,y, x):
         self.val = 3
@@ -883,7 +863,6 @@ class wBishop(White):
 
         return legal
 
-
 class wPawn(White):
     def __init__(self, y, x):
         self.val = 1
@@ -901,7 +880,7 @@ class wPawn(White):
         legal = []  # list of legal moves
 
         if idx[0] - 1 >= 0 and idx[1] + 1 < 8:  # take right
-            if isinstance(field[idx[0] + 1][idx[1] + 1], Black):  # enemy
+            if isinstance(field[idx[0] - 1][idx[1] + 1], Black):  # enemy
                 legal.append((idx[0] - 1, idx[1] + 1))
 
         if idx[0] - 1 >= 0 and idx[1] - 1 >= 0:  # take left
@@ -919,7 +898,6 @@ class wPawn(White):
         return legal
 
 #________________________________________________________________________________________________
-
 
 def drawGrid(surface):
     for y in range(border, (border+8*gridsize),gridsize): # grid
@@ -943,19 +921,6 @@ def gameStart():
         [wRook(1,1), wKnight(1,2), wBishop(1,3), wQueen(1,4), wKing(1,5), wBishop(1,6), wKnight(1,7), wRook(1,8)]
     ]
     return array
-
-# def gameStart(): #for testing
-#     array=[
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [wKing(7,1), 0, bBishop(7,3), 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
-#         [0, 0, 0, bKing(5,4),0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0],
-#         [0, 0, 0, 0, 0, 0, 0, 0]
-#     ]
-#     return array
 
 def showPieces(array):#draw all pieces
     for row in array:
@@ -2084,11 +2049,8 @@ def main():
                                 screen.fill((255, 0, 0))#red blink =mistake
                                 selected=None
 
-
                 elif event.button ==3:  #right mouse button  => unselect
                     selected=None
-
-
 
         showPieces(array)
         pygame.display.update()
