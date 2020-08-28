@@ -9,22 +9,15 @@ done:
 - Board 
 - add pieces
 - moveset of pieces
+- Pieces move correctly
 
 Goals:
-- Pieces move correctly 
+- winconditions(checkmate->game over)
 - castle, enpassant etc
-- show legal moves
-- preventing player from not deffending king(illegal)
 - show check/checkmate
-- show previous move
 - surrender button
 - clock(+increment)
-- sounds
-- different game modes
-- bots
 - turn board
-- online?
-- ?
 
 Notes:
 There have to be better ways to do the things I do(there is a lot of tedious work I have to do), but this is my 2. time using pygames and I don't know better (jet).
