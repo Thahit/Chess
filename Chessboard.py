@@ -476,7 +476,7 @@ class bPawn(Black):
             if field[idx[0] + 1][idx[1] ] == 0 :  # no piece
                 legal.append((idx[0] + 1, idx[1] ))
 
-        if idx[0] + 2 <8 :
+        if  self.y==7:
             if field[idx[0] + 2][idx[1] ] == 0:  # no piece
                 legal.append((idx[0] + 2, idx[1] ))
 
@@ -888,8 +888,8 @@ class wPawn(White):
     def __init__(self, y, x):
         self.val = 1
 
-        self.x = x #7
-        self.y = y#1-8
+        self.x = x #
+        self.y = y
 
     def show(self):
         posx = (self.x - 1) * gridsize + border + 5
@@ -913,7 +913,7 @@ class wPawn(White):
             if field[idx[0] - 1][idx[1]] == 0:  # no piece
                 legal.append((idx[0] - 1, idx[1]))
 
-        if idx[0] - 2 >= 0:
+        if self.y==2:
             if field[idx[0] - 2][idx[1]] == 0 :  # no piece
                 legal.append((idx[0] - 2, idx[1]))
         return legal
@@ -944,18 +944,18 @@ def gameStart():
     ]
     return array
 
-def gameStart(): #for testing
-    array=[
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [wKing(7,1), 0, bBishop(7,3), 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
-        [0, 0, 0, bKing(5,4),0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
-    ]
-    return array
+# def gameStart(): #for testing
+#     array=[
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [wKing(7,1), 0, bBishop(7,3), 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, wBishop(6,5), 0, 0, 0],
+#         [0, 0, 0, bKing(5,4),0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0],
+#         [0, 0, 0, 0, 0, 0, 0, 0]
+#     ]
+#     return array
 
 def showPieces(array):#draw all pieces
     for row in array:
@@ -970,7 +970,6 @@ def selectPieceLegal(array, x, y):#returns legal moves and piece
 #_______________________________main______________________________________________________
 def main():
     surface = pygame.Surface(screen.get_size())
-    # surface = surface.convert()
     drawGrid(surface)
     alive=True
     array=gameStart()
@@ -1831,14 +1830,14 @@ def main():
 
                     elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,2)
                         if selected == None:
-                            if array[6][1] ==0:
+                            if array[6][1] !=0:
                                 l = selectPieceLegal(array, 6, 1)
                                 if len(l[0])>0:
                                     selected=l[1]
                         else:#selected piece
                             if (6,1) in selected.legal(array):#possible move
                                 array[selected.arraypos(array)[0]][selected.arraypos(array)[1]]=0
-                                array[6][2]=selected
+                                array[6][1]=selected
                                 selected.y=2
                                 selected.x=2
                                 selected=None
