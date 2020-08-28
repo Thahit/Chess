@@ -59,8 +59,6 @@ class bRook(Black):
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["rook"],(posx,posy))
 
-
-
     def legal(self, field): # show legal moves  works
         idx= self.arraypos(field)  #return tuple(idx1, idx2)
         legal=[] #list of legal moves
@@ -167,6 +165,132 @@ class bQueen(Black):
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["queen"],(posx,posy))
 
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        i = -1
+        lup = True
+        while lup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1]+ i >=0:
+                if field[idx[0] + i][idx[1]+ i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                elif isinstance(field[idx[0] + i][idx[1]+ i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                    lup = False
+                else:  # friendly piece
+                    lup = False
+                i -= 1
+            else:  # out of array
+                lup = False
+
+        i = -1
+        rup = True
+        while rup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1] - i<=7:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    rup = False
+                else:  # friendly piece
+                    rup = False
+                i -= 1
+            else:  # out of array
+                rup = False
+
+        i = 1
+        ldown = True
+        while ldown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] - i>=0:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    ldown = False
+                else:  # friendly piece
+                    ldown = False
+                i += 1
+            else:  # out of array
+                ldown = False
+
+        i = 1
+        rdown = True
+        while rdown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] + i <=7:
+                if field[idx[0] + i][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                elif isinstance(field[idx[0] + i][idx[1] + i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                    rdown = False
+                else:  # friendly piece
+                    rdown = False
+                i += 1
+            else:  # out of array
+                rdown = False
+
+        i = -1
+        up = True
+        while up:  # nothing in between     move up
+            if idx[0] + i >= 0:
+                if field[idx[0] + i][idx[1]] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]))
+                elif isinstance(field[idx[0] + i][idx[1]], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    up = False
+                else:  # friendly piece
+                    up = False
+                i -= 1
+            else:  # out of array
+                up = False
+
+        i = 1
+        down = True
+        while down:  # nothing in between     move up
+            if idx[0] + i <= 7:
+                if field[idx[0] + i][idx[1]] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]))
+                elif isinstance(field[idx[0] + i][idx[1]], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    down = False
+                else:  # friendly piece
+                    down = False
+                i += 1
+            else:  # out of array
+                down = False
+
+        i = 1
+        right = True
+        while right:  # nothing in between     move up
+            if idx[1] + i <= 7:
+                if field[idx[0]][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0], idx[1] + i))
+                elif isinstance(field[idx[0]][idx[1] + i], White):  # if enemy piece
+                    legal.append((idx[0], idx[1] + i))
+                    right = False
+                else:  # friendly piece
+                    right = False
+                i += 1
+            else:  # out of array
+                right = False
+
+        i = -1
+        left = True
+        while left:  # nothing in between     move up
+            if idx[1] + i >= 0:
+                if field[idx[0]][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0], idx[1] + i))
+                elif isinstance(field[idx[0]][idx[1] + i], White):  # if enemy piece
+                    legal.append((idx[0], idx[1] + i))
+                    left = False
+                else:  # friendly piece
+                    left = False
+                i -= 1
+            else:  # out of array
+                left = False
+
+        return legal
+
 
 
 class bBishop(Black):
@@ -181,6 +305,71 @@ class bBishop(Black):
         posy= (8-self.y)*gridsize+border+5
         screen.blit(black["bishop"],(posx,posy))
 
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        i = -1
+        lup = True
+        while lup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1]+ i >=0:
+                if field[idx[0] + i][idx[1]+ i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                elif isinstance(field[idx[0] + i][idx[1]+ i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                    lup = False
+                else:  # friendly piece
+                    lup = False
+                i -= 1
+            else:  # out of array
+                lup = False
+
+        i = -1
+        rup = True
+        while rup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1] - i<=7:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    rup = False
+                else:  # friendly piece
+                    rup = False
+                i -= 1
+            else:  # out of array
+                rup = False
+
+        i = 1
+        ldown = True
+        while ldown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] - i>=0:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    ldown = False
+                else:  # friendly piece
+                    ldown = False
+                i += 1
+            else:  # out of array
+                ldown = False
+
+        i = 1
+        rdown = True
+        while rdown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] + i <=7:
+                if field[idx[0] + i][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                elif isinstance(field[idx[0] + i][idx[1] + i], White):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                    rdown = False
+                else:  # friendly piece
+                    rdown = False
+                i += 1
+            else:  # out of array
+                rdown = False
+
+        return legal
 
 
 class bPawn(Black):
@@ -315,6 +504,132 @@ class wQueen(White):
         posy = (8 - self.y) * gridsize + border + 5
         screen.blit(white["queen"], (posx, posy))
 
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        i = -1
+        lup = True
+        while lup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1]+ i >=0:
+                if field[idx[0] + i][idx[1]+ i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                elif isinstance(field[idx[0] + i][idx[1]+ i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                    lup = False
+                else:  # friendly piece
+                    lup = False
+                i -= 1
+            else:  # out of array
+                lup = False
+
+        i = -1
+        rup = True
+        while rup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1] - i<=7:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    rup = False
+                else:  # friendly piece
+                    rup = False
+                i -= 1
+            else:  # out of array
+                rup = False
+
+        i = 1
+        ldown = True
+        while ldown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] - i>=0:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    ldown = False
+                else:  # friendly piece
+                    ldown = False
+                i += 1
+            else:  # out of array
+                ldown = False
+
+        i = 1
+        rdown = True
+        while rdown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] + i <=7:
+                if field[idx[0] + i][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                elif isinstance(field[idx[0] + i][idx[1] + i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                    rdown = False
+                else:  # friendly piece
+                    rdown = False
+                i += 1
+            else:  # out of array
+                rdown = False
+
+        i = -1
+        up = True
+        while up:  # nothing in between     move up
+            if idx[0] + i >= 0:
+                if field[idx[0] + i][idx[1]] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]))
+                elif isinstance(field[idx[0] + i][idx[1]], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    up = False
+                else:  # friendly piece
+                    up = False
+                i -= 1
+            else:  # out of array
+                up = False
+
+        i = 1
+        down = True
+        while down:  # nothing in between     move up
+            if idx[0] + i <= 7:
+                if field[idx[0] + i][idx[1]] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]))
+                elif isinstance(field[idx[0] + i][idx[1]], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]))
+                    down = False
+                else:  # friendly piece
+                    down = False
+                i += 1
+            else:  # out of array
+                down = False
+
+        i = 1
+        right = True
+        while right:  # nothing in between     move up
+            if idx[1] + i <= 7:
+                if field[idx[0]][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0], idx[1] + i))
+                elif isinstance(field[idx[0]][idx[1] + i], Black):  # if enemy piece
+                    legal.append((idx[0], idx[1] + i))
+                    right = False
+                else:  # friendly piece
+                    right = False
+                i += 1
+            else:  # out of array
+                right = False
+
+        i = -1
+        left = True
+        while left:  # nothing in between     move up
+            if idx[1] + i >= 0:
+                if field[idx[0]][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0], idx[1] + i))
+                elif isinstance(field[idx[0]][idx[1] + i], Black):  # if enemy piece
+                    legal.append((idx[0], idx[1] + i))
+                    left = False
+                else:  # friendly piece
+                    left = False
+                i -= 1
+            else:  # out of array
+                left = False
+
+        return legal
+
 
 class wBishop(White):
     def __init__(self,y, x):
@@ -327,6 +642,72 @@ class wBishop(White):
         posx = (self.x - 1) * gridsize + border + 5
         posy = (8 - self.y) * gridsize + border + 5
         screen.blit(white["bishop"], (posx, posy))
+
+    def legal(self,field):
+        idx = self.arraypos(field)  # return tuple(idx1, idx2)
+        legal = []  # list of legal moves
+
+        i = -1
+        lup = True
+        while lup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1]+ i >=0:
+                if field[idx[0] + i][idx[1]+ i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                elif isinstance(field[idx[0] + i][idx[1]+ i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1]+ i))
+                    lup = False
+                else:  # friendly piece
+                    lup = False
+                i -= 1
+            else:  # out of array
+                lup = False
+
+        i = -1
+        rup = True
+        while rup:  # nothing in between     move up
+            if idx[0] + i >= 0 and idx[1] - i<=7:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    rup = False
+                else:  # friendly piece
+                    rup = False
+                i -= 1
+            else:  # out of array
+                rup = False
+
+        i = 1
+        ldown = True
+        while ldown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] - i>=0:
+                if field[idx[0] + i][idx[1] - i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                elif isinstance(field[idx[0] + i][idx[1] - i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] - i))
+                    ldown = False
+                else:  # friendly piece
+                    ldown = False
+                i += 1
+            else:  # out of array
+                ldown = False
+
+        i = 1
+        rdown = True
+        while rdown:  # nothing in between     move up
+            if idx[0] + i <= 7 and idx[1] + i <=7:
+                if field[idx[0] + i][idx[1] + i] == 0:  # no piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                elif isinstance(field[idx[0] + i][idx[1] + i], Black):  # if enemy piece
+                    legal.append((idx[0] + i, idx[1] + i))
+                    rdown = False
+                else:  # friendly piece
+                    rdown = False
+                i += 1
+            else:  # out of array
+                rdown = False
+
+        return legal
 
 
 class wPawn(White):
@@ -374,8 +755,8 @@ def gameStart(): #for testing
     array=[
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, bRook(5,4), wRook(5,5), 0, 0, 0],
+        [0, 0, wBishop(6,3), 0, wBishop(6,5), 0, 0, 0],
+        [0, 0, 0, bQueen(5,4),0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -407,6 +788,6 @@ def main():
 
         showPieces(array)
 
-        #print(array[3][3].legal(array))
+        print(array[3][3].legal(array))
         pygame.display.update()
 main()
