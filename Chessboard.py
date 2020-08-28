@@ -1,5 +1,6 @@
 import pygame
 from abc import ABC
+print("Imports complete.")
 
 #img from https://en.wikipedia.org/wiki/Chess_piece
 white={"king": pygame.image.load("img/wKing.png"), "queen": pygame.image.load("img/wQueen.png"), "rook":pygame.image.load("img/wRook.png"),
@@ -7,12 +8,10 @@ white={"king": pygame.image.load("img/wKing.png"), "queen": pygame.image.load("i
 black={"king": pygame.image.load("img/bKing.png"), "queen": pygame.image.load("img/bQueen.png"), "rook":pygame.image.load("img/bRook.png"),
        "bishop": pygame.image.load("img/bBishop.png"),"knight":pygame.image.load("img/bKnight.png"), "pawn":pygame.image.load("img/bPawn.png")}
 
-
-#window
+#window setting
 pygame.init()
 pygame.display.set_caption("Chess")
 pygame.display.set_icon(pygame.image.load("img/bKnight.png"))
-
 
 gridsize=55
 width=700
@@ -21,15 +20,13 @@ height=gridsize*8+ 2*border
 font = pygame.font.Font('freesansbold.ttf', 20)
 screen = pygame.display.set_mode((width, height))
 #__________________________class types______________________________________________
-#to check for allies/enemies
+#to check for allies/enemies the pieces need to be part of a class/type
 class Black(ABC):
     def __init__(self, y, x):
         self.x=x
         self.y=y
     def arraypos(self, array):  # where is it in array
         return (8 - self.y, self.x - 1)
-
-
 
 class White(ABC):
     def __init__(self, y, x):
@@ -38,7 +35,6 @@ class White(ABC):
 
     def arraypos(self, array):  # where is it in array
         return (8 - self.y, self.x - 1)
-
 
 #get pos from index
 def idxToPos(tuple): #not sure if ti will get used
@@ -963,11 +959,11 @@ def showPieces(array):#draw all pieces
                 p.show()
 
 def selectPiece(array,x,y):
-    pass
+    print(array[x][y].legal(array))
 
 def main():
     surface = pygame.Surface(screen.get_size())
-    surface = surface.convert()
+    # surface = surface.convert()
     drawGrid(surface)
     alive=True
     array=gameStart()
@@ -983,214 +979,217 @@ def main():
             if event.type == pygame.QUIT:  # stop game
                 alive = False
 
-            #selecting stuff
+            #mousebuttons
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if selected==None:
-                    #row 8
-                    if (border <event.pos[0] < border +gridsize) and (border <event.pos[1] < border +gridsize):#(8,1)
-                        if array[0][0] ==0:
-                            selectPiece(array,0,0)
-                    elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border <event.pos[1] < border +gridsize):#(8,2)
-                        if array[0][1] ==0:
-                            selectPiece(array,0,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border < event.pos[1] < border + gridsize):# (8,3)
-                        if array[0][2] == 0:
-                            selectPiece(array,0,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border < event.pos[1] < border + gridsize):# (8,4)
-                        if array[0][3] == 0:
-                            selectPiece(array,0,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border < event.pos[1] < border + gridsize):# (8,5)
-                        if array[0][4] == 0:
-                            selectPiece(array,0,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border < event.pos[1] < border + gridsize):# (8,6)
-                        if array[0][5] == 0:
-                            selectPiece(array,0,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border < event.pos[1] < border + gridsize):# (8,7)
-                        if array[0][6] == 0:
-                            selectPiece(array,0,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border < event.pos[1] < border + gridsize):# (8,8)
-                        if array[0][7] == 0:
-                            selectPiece(array,0,7)
-                    #row7
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,1)
-                        if array[1][0] ==0:
-                            selectPiece(array,1,0)
-                    elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,2)
-                        if array[1][1] ==0:
-                            selectPiece(array,1,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,3)
-                        if array[1][2] == 0:
-                            selectPiece(array,1,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,4)
-                        if array[1][3] == 0:
-                            selectPiece(array,1,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,5)
-                        if array[1][4] == 0:
-                            selectPiece(array,1,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,6)
-                        if array[1][5] == 0:
-                            selectPiece(array,1,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,7)
-                        if array[1][6] == 0:
-                            selectPiece(array,1,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,8)
-                        if array[1][7] == 0:
-                            selectPiece(array,1,7)
-                    #row6
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,1)
-                        if array[2][0] ==0:
-                            selectPiece(array,2,0)
-                    elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,2)
-                        if array[2][1] ==0:
-                            selectPiece(array,2,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,3)
-                        if array[2][2] == 0:
-                            selectPiece(array,2,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,4)
-                        if array[2][3] == 0:
-                            selectPiece(array,2,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,5)
-                        if array[2][4] == 0:
-                            selectPiece(array,2,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,6)
-                        if array[2][5] == 0:
-                            selectPiece(array,2,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,7)
-                        if array[2][6] == 0:
-                            selectPiece(array,2,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,8)
-                        if array[2][7] == 0:
-                            selectPiece(array,2,7)
-                    #row 5
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,1)
-                        if array[3][0] ==0:
-                            selectPiece(array,3,0)
-                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,2)
-                        if array[3][1] ==0:
-                            selectPiece(array,3,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,3)
-                        if array[3][2] == 0:
-                            selectPiece(array,3,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,4)
-                        if array[3][3] == 0:
-                            selectPiece(array,3,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,5)
-                        if array[3][4] == 0:
-                            selectPiece(array,3,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,6)
-                        if array[3][5] == 0:
-                            selectPiece(array,3,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,7)
-                        if array[3][6] == 0:
-                            selectPiece(array,3,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,8)
-                        if array[3][7] == 0:
-                            selectPiece(array,3,7)
-                    #row 4
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,1)
-                        if array[4][0] ==0:
-                            selectPiece(array,4,0)
-                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,2)
-                        if array[4][1] ==0:
-                            selectPiece(array,4,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,3)
-                        if array[4][2] == 0:
-                            selectPiece(array,4,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,4)
-                        if array[4][3] == 0:
-                            selectPiece(array,4,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,5)
-                        if array[4][4] == 0:
-                            selectPiece(array,4,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,6)
-                        if array[4][5] == 0:
-                            selectPiece(array,4,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,7)
-                        if array[4][6] == 0:
-                            selectPiece(array,4,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,8)
-                        if array[4][7] == 0:
-                            selectPiece(array,4,7)
-                    #row3
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,1)
-                        if array[5][0] ==0:
-                            selectPiece(array,5,0)
-                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,2)
-                        if array[5][1] ==0:
-                            selectPiece(array,5,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,3)
-                        if array[5][2] == 0:
-                            selectPiece(array,5,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,4)
-                        if array[5][3] == 0:
-                            selectPiece(array,5,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,5)
-                        if array[5][4] == 0:
-                            selectPiece(array,5,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,6)
-                        if array[5][5] == 0:
-                            selectPiece(array,5,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,7)
-                        if array[5][6] == 0:
-                            selectPiece(array,5,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,8)
-                        if array[5][7] == 0:
-                            selectPiece(array,5,7)
-                    #row2
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,1)
-                        if array[6][0] ==0:
-                            selectPiece(array,6,0)
-                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,2)
-                        if array[6][1] ==0:
-                            selectPiece(array,6,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,3)
-                        if array[6][2] == 0:
-                            selectPiece(array,6,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,4)
-                        if array[6][3] == 0:
-                            selectPiece(array,6,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,5)
-                        if array[6][4] == 0:
-                            selectPiece(array,6,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,6)
-                        if array[6][5] == 0:
-                            selectPiece(array,6,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,7)
-                        if array[6][6] == 0:
-                            selectPiece(array,6,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,8)
-                        if array[6][7] == 0:
-                            selectPiece(array,6,7)
-                    #row1
-                    elif (border <event.pos[0] < border +gridsize) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,1)
-                        if array[7][0] ==0:
-                            selectPiece(array,7,0)
-                    elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,2)
-                        if array[7][1] ==0:
-                            selectPiece(array,7,1)
-                    elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,3)
-                        if array[7][2] == 0:
-                            selectPiece(array,7,2)
-                    elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,4)
-                        if array[7][3] == 0:
-                            selectPiece(array,7,3)
-                    elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,5)
-                        if array[7][4] == 0:
-                            selectPiece(array,7,4)
-                    elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,6)
-                        if array[7][5] == 0:
-                            selectPiece(array,7,5)
-                    elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,7)
-                        if array[7][6] == 0:
-                            selectPiece(array,7,6)
-                    elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,8)
-                        if array[7][7] == 0:
-                            selectPiece(array,7,7)
+                if event.button==1: #= if leftclick
+                    if selected==None:
+                        #row 8
+                        if (border <event.pos[0] < border +gridsize) and (border <event.pos[1] < border +gridsize):#(8,1)
+                            if array[0][0] !=0:
+                                selectPiece(array,0,0)
+                        elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border <event.pos[1] < border +gridsize):#(8,2)
+                            if array[0][1] !=0:
+                                selectPiece(array,0,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border < event.pos[1] < border + gridsize):# (8,3)
+                            if array[0][2] != 0:
+                                selectPiece(array,0,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border < event.pos[1] < border + gridsize):# (8,4)
+                            if array[0][3] != 0:
+                                selectPiece(array,0,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border < event.pos[1] < border + gridsize):# (8,5)
+                            if array[0][4] != 0:
+                                selectPiece(array,0,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border < event.pos[1] < border + gridsize):# (8,6)
+                            if array[0][5] != 0:
+                                selectPiece(array,0,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border < event.pos[1] < border + gridsize):# (8,7)
+                            if array[0][6] != 0:
+                                selectPiece(array,0,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border < event.pos[1] < border + gridsize):# (8,8)
+                            if array[0][7] != 0:
+                                selectPiece(array,0,7)
+                        #row7
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,1)
+                            if array[1][0] !=0:
+                                selectPiece(array,1,0)
+                        elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize <event.pos[1] < border +gridsize*2):#(7,2)
+                            if array[1][1] !=0:
+                                selectPiece(array,1,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,3)
+                            if array[1][2] != 0:
+                                selectPiece(array,1,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,4)
+                            if array[1][3] != 0:
+                                selectPiece(array,1,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,5)
+                            if array[1][4] != 0:
+                                selectPiece(array,1,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,6)
+                            if array[1][5] != 0:
+                                selectPiece(array,1,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,7)
+                            if array[1][6] != 0:
+                                selectPiece(array,1,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize <event.pos[1] < border +gridsize*2):# (7,8)
+                            if array[1][7] != 0:
+                                selectPiece(array,1,7)
+                        #row6
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,1)
+                            if array[2][0] !=0:
+                                selectPiece(array,2,0)
+                        elif (border+gridsize <event.pos[0] < border +gridsize*2) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):#(6,2)
+                            if array[2][1] !=0:
+                                selectPiece(array,2,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,3)
+                            if array[2][2] != 0:
+                                selectPiece(array,2,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,4)
+                            if array[2][3] != 0:
+                                selectPiece(array,2,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,5)
+                            if array[2][4] != 0:
+                                selectPiece(array,2,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,6)
+                            if array[2][5] != 0:
+                                selectPiece(array,2,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,7)
+                            if array[2][6] != 0:
+                                selectPiece(array,2,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*2 <event.pos[1] < border +gridsize*3):# (6,8)
+                            if array[2][7] != 0:
+                                selectPiece(array,2,7)
+                        #row 5
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,1)
+                            if array[3][0] !=0:
+                                selectPiece(array,3,0)
+                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):#(5,2)
+                            if array[3][1] !=0:
+                                selectPiece(array,3,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,3)
+                            if array[3][2] != 0:
+                                selectPiece(array,3,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,4)
+                            if array[3][3] != 0:
+                                selectPiece(array,3,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,5)
+                            if array[3][4] != 0:
+                                selectPiece(array,3,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,6)
+                            if array[3][5] != 0:
+                                selectPiece(array,3,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,7)
+                            if array[3][6] != 0:
+                                selectPiece(array,3,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*3 <event.pos[1] < border +gridsize*4):# (5,8)
+                            if array[3][7] != 0:
+                                selectPiece(array,3,7)
+                        #row 4
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,1)
+                            if array[4][0] !=0:
+                                selectPiece(array,4,0)
+                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):#(4,2)
+                            if array[4][1] !=0:
+                                selectPiece(array,4,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,3)
+                            if array[4][2] != 0:
+                                selectPiece(array,4,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,4)
+                            if array[4][3] != 0:
+                                selectPiece(array,4,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,5)
+                            if array[4][4] != 0:
+                                selectPiece(array,4,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,6)
+                            if array[4][5] != 0:
+                                selectPiece(array,4,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,7)
+                            if array[4][6] != 0:
+                                selectPiece(array,4,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*4 <event.pos[1] < border +gridsize*5):# (4,8)
+                            if array[4][7] != 0:
+                                selectPiece(array,4,7)
+                        #row3
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,1)
+                            if array[5][0] !=0:
+                                selectPiece(array,5,0)
+                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):#(3,2)
+                            if array[5][1] !=0:
+                                selectPiece(array,5,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,3)
+                            if array[5][2] != 0:
+                                selectPiece(array,5,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,4)
+                            if array[5][3] != 0:
+                                selectPiece(array,5,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,5)
+                            if array[5][4] != 0:
+                                selectPiece(array,5,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,6)
+                            if array[5][5] != 0:
+                                selectPiece(array,5,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,7)
+                            if array[5][6] != 0:
+                                selectPiece(array,5,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*5 <event.pos[1] < border +gridsize*6):# (3,8)
+                            if array[5][7] != 0:
+                                selectPiece(array,5,7)
+                        #row2
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,1)
+                            if array[6][0] !=0:
+                                selectPiece(array,6,0)
+                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):#(2,2)
+                            if array[6][1] ==0:
+                                selectPiece(array,6,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,3)
+                            if array[6][2] != 0:
+                                selectPiece(array,6,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,4)
+                            if array[6][3] != 0:
+                                selectPiece(array,6,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,5)
+                            if array[6][4] != 0:
+                                selectPiece(array,6,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,6)
+                            if array[6][5] != 0:
+                                selectPiece(array,6,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,7)
+                            if array[6][6] != 0:
+                                selectPiece(array,6,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*6 <event.pos[1] < border +gridsize*7):# (2,8)
+                            if array[6][7] != 0:
+                                selectPiece(array,6,7)
+                        #row1
+                        elif (border <event.pos[0] < border +gridsize) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,1)
+                            if array[7][0] !=0:
+                                selectPiece(array,7,0)
+                        elif (border+55 <event.pos[0] < border +gridsize*2) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):#(1,2)
+                            if array[7][1] !=0:
+                                selectPiece(array,7,1)
+                        elif (border+gridsize*2 < event.pos[0] < border + gridsize*3) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,3)
+                            if array[7][2] != 0:
+                                selectPiece(array,7,2)
+                        elif (border+gridsize*3 < event.pos[0] < border + +gridsize*4) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,4)
+                            if array[7][3] != 0:
+                                selectPiece(array,7,3)
+                        elif (border+gridsize*4 < event.pos[0] < border + +gridsize*5) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,5)
+                            if array[7][4] != 0:
+                                selectPiece(array,7,4)
+                        elif (border+gridsize*5 < event.pos[0] < border + +gridsize*6) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,6)
+                            if array[7][5] != 0:
+                                selectPiece(array,7,5)
+                        elif (border+gridsize*6 < event.pos[0] < border + +gridsize*7) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,7)
+                            if array[7][6] != 0:
+                                selectPiece(array,7,6)
+                        elif (border+gridsize*7 < event.pos[0] < border + +gridsize*8) and (border+gridsize*7 <event.pos[1] < border +gridsize*8):# (1,8)
+                            if array[7][7] != 0:
+                                selectPiece(array,7,7)
+
+                elif event.button ==3:  #right mouse button  => unselect
+                    selected=None
 
 
 
-
-        # print(array[3][3].legal(array))
+        showPieces(array)
         pygame.display.update()
 
 if __name__ =="__main__":
