@@ -28,6 +28,7 @@ Goals:
 
 Notes:
 There have to be better ways to do the things I do(there is a lot of tedious work I have to do), but this is my 2. time using pygames and I don't know better (jet).
+The constant coonversions of the idx is quite annoying, but i wanted to use the chess idx(start is botttom left)
 
 img:
 By en:User:Cburnett - Own workThis W3C-unspecified vector image was created with Inkscape., CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=1499809
