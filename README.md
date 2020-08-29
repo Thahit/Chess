@@ -29,6 +29,7 @@ By en:User:Cburnett - Own workThis W3C-unspecified vector image was created with
 All the pieces are from this entity
 
 # Chess2
+Future projects
 goals:
 - Board 
 - add pieces
