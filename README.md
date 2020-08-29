@@ -1,6 +1,6 @@
 # Chess
 # chessboard
-Recreated the game chess (without the chess library). You play chess against yourself. I will make chess bots etc. on another program. This project was for me to give myself the permission to use the chess library in the future and to show I can do these tedious tasks.
+Recreated the game chess (without the chess library). You play chess against yourself. This project was for me to give myself the permission to use the chess library in the future and to show I can do these tedious tasks.
 
 screenshot:
 ![GitHub Logo](Img/Screenshot1.png)
