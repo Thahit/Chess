@@ -1,10 +1,9 @@
 # Chess
-# chessboard
-Recreated the game chess (without the chess library). You play chess against yourself. This project was for me to give myself the permission to use the chess library in the future and to show I can do these tedious tasks.
+## Chessboard
+Recreated the game chess (without the chess library). You can play chess against yourself. It is very simplistic. I wrote this program before learning about design principles etc. so there is a lot of repeating code and technical dept.
 
 screenshot:
 ![GitHub Logo](Img/Screenshot1.png)
-
 
 done:
 - Board 
@@ -19,9 +18,9 @@ NOT there:
 - clock(+increment)
 - turn board
 - bots
+- online vs.
 
 Notes:
-There have to be better ways to do the things I do(there is a lot of tedious work I have to do), but this is my 2. time using pygames and I don't know better (jet).
 The constant coonversions of the idx is quite annoying, but i wanted to use the chess idx(start is botttom left).
 
 img:
